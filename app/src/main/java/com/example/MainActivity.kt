@@ -69,6 +69,10 @@ class MainActivity : ComponentActivity() {
                 val activeTab by viewModel.activeTab.collectAsStateWithLifecycle()
                 val regenChar by viewModel.regenDialogCharacter.collectAsStateWithLifecycle()
                 val showExport by viewModel.showExportDialog.collectAsStateWithLifecycle()
+                val showParity by viewModel.showParityDialog.collectAsStateWithLifecycle()
+                val showVideoInspector by viewModel.showVideoInspector.collectAsStateWithLifecycle()
+                val activeVideoUri by viewModel.activeVideoUri.collectAsStateWithLifecycle()
+                val extractedFrames by viewModel.extractedFrames.collectAsStateWithLifecycle()
                 val copiedPromptId by viewModel.copiedPromptId.collectAsStateWithLifecycle()
                 val toastMessage by viewModel.toastMessage.collectAsStateWithLifecycle()
 
@@ -117,7 +121,8 @@ class MainActivity : ComponentActivity() {
                                     processingStatusText = processingStatusText,
                                     onVideoSelected = { uri, name -> viewModel.onLocalVideoPicked(uri, name) },
                                     onSampleSelected = { type -> viewModel.loadSampleProject(type) },
-                                    onStartScan = { viewModel.startReverseEngineering() }
+                                    onStartScan = { viewModel.startReverseEngineering() },
+                                    onInspectVideo = { viewModel.openVideoInspector() }
                                 )
                             }
 
@@ -150,10 +155,13 @@ class MainActivity : ComponentActivity() {
                                         project = proj,
                                         activeTab = activeTab,
                                         copiedPromptId = copiedPromptId,
+                                        extractedFrames = extractedFrames,
                                         onTabSelected = { viewModel.setActiveTab(it) },
                                         onEngineChanged = { viewModel.setTargetEngine(it) },
                                         onCopyPrompt = { text, id -> viewModel.copyToClipboard(text, id, "Storyboard Prompt") },
                                         onOpenExport = { viewModel.openExportDialog() },
+                                        onOpenParityDialog = { viewModel.openParityDialog() },
+                                        onInspectVideo = { viewModel.openVideoInspector() },
                                         onBack = { viewModel.proceedToDurationSelector() },
                                         onRegenCharacter = { viewModel.openRegenDialog(it) }
                                     )
@@ -221,6 +229,29 @@ class MainActivity : ComponentActivity() {
                                     viewModel.copyToClipboard(content, null, label)
                                 }
                             )
+                        }
+
+                        // Parity Verification Audit Dialog Modal
+                        if (showParity) {
+                            currentProject?.let { proj ->
+                                com.example.ui.components.ParityValidationDialog(
+                                    projectTitle = proj.title,
+                                    verificationItems = viewModel.getParityVerificationItems(),
+                                    onDismiss = { viewModel.dismissParityDialog() }
+                                )
+                            }
+                        }
+
+                        // Real Video & Frame Inspector Modal
+                        if (showVideoInspector) {
+                            currentProject?.let { proj ->
+                                com.example.ui.components.VideoInspectorDialog(
+                                    project = proj,
+                                    videoUri = activeVideoUri,
+                                    extractedFrame = extractedFrames["sb_1"],
+                                    onDismiss = { viewModel.dismissVideoInspector() }
+                                )
+                            }
                         }
                     }
                 }

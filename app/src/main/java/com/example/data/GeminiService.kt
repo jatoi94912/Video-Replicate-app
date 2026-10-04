@@ -59,6 +59,22 @@ class GeminiService(private val context: Context) {
         - OUTPUT MUST BE INDISTINGUISHABLE FROM SOURCE WHEN FED TO SEEDANCE/KLING/SORA.
     """.trimIndent()
 
+    fun copyAssetVideoToInternalStorage(assetName: String): Uri? {
+        return try {
+            val file = java.io.File(context.filesDir, assetName)
+            if (!file.exists() || file.length() == 0L) {
+                context.assets.open(assetName).use { input ->
+                    java.io.FileOutputStream(file).use { output ->
+                        input.copyTo(output)
+                    }
+                }
+            }
+            Uri.fromFile(file)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
     suspend fun extractVideoMetadata(uri: Uri): VideoMetadata = withContext(Dispatchers.IO) {
         val retriever = MediaMetadataRetriever()
         try {

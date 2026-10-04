@@ -1,0 +1,64 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Debug & Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Ensure Environment File Exists
+        run: |
+          if [ ! -f ".env" ]; then
+            echo "Creating .env from .env.example..."
+            cp .env.example .env
+          fi
+
+      - name: Ensure Debug Keystore Exists
+        run: |
+          if [ ! -f "debug.keystore" ]; then
+            echo "Generating debug.keystore for CI build..."
+            keytool -genkey -v -keystore debug.keystore \
+              -storepass android \
+              -alias androiddebugkey \
+              -keypass android \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -dname "CN=Android Debug,O=Android,C=US"
+          fi
+
+      - name: Grant Execute Permission to Gradlew
+        run: chmod +x gradlew
+
+      - name: Build Debug APK with Gradle
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Verify Generated APK
+        run: |
+          echo "Listing generated APKs:"
+          ls -la app/build/outputs/apk/debug/
+
+      - name: Upload Debug APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: RECON-AI-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
+          retention-days: 30

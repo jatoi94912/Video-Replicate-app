@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -55,6 +56,7 @@ fun StoryboardCardView(
     card: StoryboardCard,
     isCopied: Boolean,
     onCopyPrompt: () -> Unit,
+    extractedFrame: android.graphics.Bitmap? = null,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -125,28 +127,37 @@ fun StoryboardCardView(
                     )
                     .border(1.dp, ReconCardBorder, RoundedCornerShape(14.dp))
             ) {
-                // Background artistic visual cue
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(14.dp)
-                        .align(Alignment.Center),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Movie,
-                        contentDescription = null,
-                        tint = ReconCyan.copy(alpha = 0.5f),
-                        modifier = Modifier.size(36.dp)
+                if (extractedFrame != null) {
+                    androidx.compose.foundation.Image(
+                        bitmap = extractedFrame.asImageBitmap(),
+                        contentDescription = "Scene Frame",
+                        contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                        modifier = Modifier.matchParentSize()
                     )
-                    Spacer(modifier = Modifier.height(6.dp))
-                    Text(
-                        text = card.visualSummary,
-                        fontSize = 12.sp,
-                        color = ReconTextPrimary,
-                        lineHeight = 16.sp,
-                        maxLines = 3
-                    )
+                } else {
+                    // Background artistic visual cue
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(14.dp)
+                            .align(Alignment.Center),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Movie,
+                            contentDescription = null,
+                            tint = ReconCyan.copy(alpha = 0.5f),
+                            modifier = Modifier.size(36.dp)
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+                        Text(
+                            text = card.visualSummary,
+                            fontSize = 12.sp,
+                            color = ReconTextPrimary,
+                            lineHeight = 16.sp,
+                            maxLines = 3
+                        )
+                    }
                 }
 
                 // Reference timestamp badge bottom-right

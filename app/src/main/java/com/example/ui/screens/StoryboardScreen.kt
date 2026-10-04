@@ -75,10 +75,13 @@ fun StoryboardScreen(
     project: VideoProject,
     activeTab: Int,
     copiedPromptId: String?,
+    extractedFrames: Map<String, android.graphics.Bitmap> = emptyMap(),
     onTabSelected: (Int) -> Unit,
     onEngineChanged: (TargetPromptEngine) -> Unit,
     onCopyPrompt: (String, String) -> Unit,
     onOpenExport: () -> Unit,
+    onOpenParityDialog: () -> Unit,
+    onInspectVideo: () -> Unit,
     onBack: () -> Unit,
     onRegenCharacter: (com.example.model.CharacterCard) -> Unit,
     modifier: Modifier = Modifier
@@ -185,6 +188,46 @@ fun StoryboardScreen(
                     MiniBadge("Storyboard Cards", "${project.storyboardCards.size} Cards")
                     MiniBadge("Locked Cast", "${project.characters.size} Characters")
                 }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // Verification & Real Video Inspector Action Row
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    androidx.compose.material3.OutlinedButton(
+                        onClick = onOpenParityDialog,
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = ReconMatrixGreen),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, ReconMatrixGreen.copy(alpha = 0.8f)),
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(36.dp)
+                            .testTag("verify_parity_button"),
+                        contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp, vertical = 2.dp)
+                    ) {
+                        Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(13.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("🔍 Dialogue Parity 100%", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    }
+
+                    androidx.compose.material3.OutlinedButton(
+                        onClick = onInspectVideo,
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = ReconCyan),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, ReconCyan.copy(alpha = 0.8f)),
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(36.dp)
+                            .testTag("inspect_source_video_button"),
+                        contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp, vertical = 2.dp)
+                    ) {
+                        Icon(Icons.Default.Movie, contentDescription = null, modifier = Modifier.size(13.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("▶️ Real Video Inspector", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    }
+                }
             }
         }
 
@@ -256,12 +299,14 @@ fun StoryboardScreen(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         items(project.storyboardCards, key = { it.id }) { card ->
+                            val frame = extractedFrames["sb_${card.segmentIndex}"] ?: extractedFrames[card.id]
                             StoryboardCardView(
                                 card = card,
                                 isCopied = copiedPromptId == "storyboard_prompt_${card.segmentIndex}",
                                 onCopyPrompt = {
                                     onCopyPrompt(card.videoPrompt, "storyboard_prompt_${card.segmentIndex}")
-                                }
+                                },
+                                extractedFrame = frame
                             )
                         }
                     }
@@ -280,6 +325,7 @@ fun StoryboardScreen(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         items(project.characters, key = { it.id }) { character ->
+                            val frame = extractedFrames[character.id]
                             CharacterCardView(
                                 character = character,
                                 isCopied = copiedPromptId == "char_${character.id}",
@@ -287,6 +333,7 @@ fun StoryboardScreen(
                                 onUnapprove = {},
                                 onRegen = { onRegenCharacter(character) },
                                 onCopyPrompt = { onCopyPrompt(character.designSheetPrompt, "char_${character.id}") },
+                                extractedFrame = frame,
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }

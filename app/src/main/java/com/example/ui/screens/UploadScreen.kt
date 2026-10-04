@@ -81,6 +81,7 @@ fun UploadScreen(
     onVideoSelected: (Uri, String) -> Unit,
     onSampleSelected: (String) -> Unit,
     onStartScan: () -> Unit,
+    onInspectVideo: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -266,6 +267,23 @@ fun UploadScreen(
                         SpecBadge("Resolution", currentProject.metadata.resolution)
                         SpecBadge("Frame Rate", currentProject.metadata.frameRate)
                         SpecBadge("Characters", "${currentProject.characters.size} Detected")
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    OutlinedButton(
+                        onClick = onInspectVideo,
+                        shape = RoundedCornerShape(10.dp),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = ReconCyan),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, ReconCyan.copy(alpha = 0.7f)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(42.dp)
+                            .testTag("play_inspect_video_button")
+                    ) {
+                        Icon(Icons.Default.PlayCircle, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("▶️ Play & Inspect Real Video Source", fontSize = 13.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }

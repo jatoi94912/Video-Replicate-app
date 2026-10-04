@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -63,6 +64,7 @@ fun CharacterCardView(
     onUnapprove: () -> Unit,
     onRegen: () -> Unit,
     onCopyPrompt: () -> Unit,
+    extractedFrame: android.graphics.Bitmap? = null,
     modifier: Modifier = Modifier
 ) {
     val borderColor by animateColorAsState(
@@ -98,17 +100,25 @@ fun CharacterCardView(
                         )
                     )
                     .border(1.dp, Color(character.avatarColorHex).copy(alpha = 0.4f), RoundedCornerShape(14.dp))
-                    .padding(10.dp)
             ) {
-                // Background icon / graphic
-                Icon(
-                    imageVector = Icons.Default.Person,
-                    contentDescription = null,
-                    tint = Color(character.avatarColorHex).copy(alpha = 0.25f),
-                    modifier = Modifier
-                        .size(80.dp)
-                        .align(Alignment.Center)
-                )
+                if (extractedFrame != null) {
+                    androidx.compose.foundation.Image(
+                        bitmap = extractedFrame.asImageBitmap(),
+                        contentDescription = character.name,
+                        contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                        modifier = Modifier.matchParentSize()
+                    )
+                } else {
+                    // Background icon / graphic
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = null,
+                        tint = Color(character.avatarColorHex).copy(alpha = 0.25f),
+                        modifier = Modifier
+                            .size(80.dp)
+                            .align(Alignment.Center)
+                    )
+                }
 
                 // Top left role pill
                 Box(

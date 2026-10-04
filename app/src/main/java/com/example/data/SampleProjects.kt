@@ -125,7 +125,7 @@ LIGHTING: Hard noir rim light, moody amber neon key, particulate smoke in air, p
                 endSeconds = 10,
                 referenceTimestamp = "0:04",
                 visualSummary = "Rain-drenched alley in Neo-Tokyo. Raven drops silently from iron fire escape onto steaming grated catwalk, tactical optics glowing cyan in deep shadows.",
-                audioTranscript = "\"Sub-level 4 breach confirmed. Thorne, the quantum drive is destabilizing.\" - Radio crackle, rain hum.",
+                audioTranscript = "Raven Kane: \"Sub-level 4 breach confirmed. Thorne, the quantum drive is destabilizing.\"",
                 audioAtmosphere = "Heavy urban rainfall, distant aerial cruiser sirens, electrical transformer hum.",
                 cameraPhysics = "Low-angle crane tracking shot, descending smoothly with subject momentum, settling into fluid 35mm medium close-up.",
                 lightingTexture = "Wet asphalt reflections, 5600K cyan neon highlights hitting soaked carbon fibers, deep 0.5 lux shadow falloff.",
@@ -133,12 +133,12 @@ LIGHTING: Hard noir rim light, moody amber neon key, particulate smoke in air, p
                 nextSegmentSummary = "Scene 2: Alleyway confrontation & security coil alert",
                 videoPrompt = """```prompt
 HEADER:
-Format: Photorealistic Cinematic Film | Ratio: 16:9 | Duration: 10s | Atmosphere: Dystopian Cyber-Noir Rainstorm | Audio: Rain patter, transformer buzz, muffled radio | Identity Lock Clause: [ref_image] = locked master still from Phase 1 (Raven Kane)
+Format: Photorealistic Cinematic Film | Ratio: 16:9 | Duration: 10s | Atmosphere: Dystopian Cyber-Noir Rainstorm | Audio: Raven Kane (voice): "Sub-level 4 breach confirmed. Thorne, the quantum drive is destabilizing." | Rain patter, transformer buzz | Identity Lock Clause: [ref_image] = locked master still from Phase 1 (Raven Kane)
 
 TIMELINE:
 0:00–0:03: Extreme high-angle looking down into narrow neon-lit alleyway; rain pours through steam vents. A dark figure leaps from upper fire escape.
 0:03–0:06: Camera descends rapidly alongside falling subject; camera physics match free-fall drag, landing softly on metal grating with micro-impact camera shake.
-0:06–0:10: Subject (Raven Kane, [ref_image]) stands in low athletic crouch; right biometric cyan iris glints; she taps temple comms device while surveying perimeter.
+0:06–0:10: Subject (Raven Kane, [ref_image]) stands in low athletic crouch; right biometric cyan iris glints; she taps temple comms device, speaking clearly into radio: "Sub-level 4 breach confirmed. Thorne, the quantum drive is destabilizing."
 
 STYLE BOOSTERS:
 Camera physics: Anamorphic Panavision C-series lens, shallow depth of field (T1.4), horizontal blue streak flares, optical barrel distortion.
@@ -156,7 +156,7 @@ Negative constraints: No cartoon stylization, no oversaturated skin, no frame st
                 endSeconds = 20,
                 referenceTimestamp = "0:15",
                 visualSummary = "Dr. Aris Thorne emerges from steam vent corridor. His mechanical brass forearm rotates into diagnostic mode as high-voltage perimeter coils spark violently.",
-                audioTranscript = "\"Don't touch the perimeter coils. The security grid is hard-coded to biometrics.\" / \"Too late. We have company on the catwalks.\"",
+                audioTranscript = "Dr. Aris Thorne: \"Don't touch the perimeter coils. The security grid is hard-coded to biometrics.\"",
                 audioAtmosphere = "Electrical arc snaps, mechanical servo hum, rising synthesizer drone tension.",
                 cameraPhysics = "Steadicam lateral tracking push-in; orbits from Thorne's shoulder over to Raven's profile in seamless parity.",
                 lightingTexture = "Flickering amber sodium-vapor lamps contrasting with intermittent blue arc flashes.",
@@ -164,12 +164,12 @@ Negative constraints: No cartoon stylization, no oversaturated skin, no frame st
                 nextSegmentSummary = "Scene 3: Gunfire & tactical ambush on the catwalks",
                 videoPrompt = """```prompt
 HEADER:
-Format: Photorealistic Cinematic Film | Ratio: 16:9 | Duration: 10s | Atmosphere: High-Stakes Tactical Suspense | Audio: Heavy electrical arcing, mechanical gear whirs | Identity Lock Clause: [ref_image] = locked master still from Phase 1 (Dr. Aris Thorne & Raven Kane)
+Format: Photorealistic Cinematic Film | Ratio: 16:9 | Duration: 10s | Atmosphere: High-Stakes Tactical Suspense | Audio: Dr. Aris Thorne (gravelly voice): "Don't touch the perimeter coils. The security grid is hard-coded to biometrics." | Heavy electrical arcing | Identity Lock Clause: [ref_image] = locked master still from Phase 1 (Dr. Aris Thorne & Raven Kane)
 
 TIMELINE:
 0:10–0:13: Steadicam push through billowing white alley steam; Dr. Thorne ([ref_image]) emerges in heavy slate trench coat, adjusting his rolled sleeve.
 0:13–0:16: Close-up on Thorne's brushed brass prosthetic forearm as miniature hydraulic valves cycle and emit high-pressure vapor; fingers flex with tactile weight.
-0:16–0:20: Two-shot profile: Thorne steps beside Raven; both look up simultaneously as red laser targeting grid sweeps across the brick facade behind them.
+0:16–0:20: Two-shot profile: Thorne steps beside Raven, speaking with gravelly urgency: "Don't touch the perimeter coils. The security grid is hard-coded to biometrics." Both look up as red laser targeting grid sweeps the wall.
 
 STYLE BOOSTERS:
 Camera physics: 50mm prime, handheld breathing motion with stabilizer dampening, subtle rack focus between prosthetic gears and background laser dot.
@@ -187,7 +187,7 @@ Negative constraints: No jittery blur, no face morphology shifts, no plastic ski
                 endSeconds = 30,
                 referenceTimestamp = "0:25",
                 visualSummary = "Ambush on the catwalks! Silenced magnetic muzzle bursts illuminate the darkness. Raven slides beneath steel railing while firing suppressing rounds.",
-                audioTranscript = "\"Extraction shuttle ETA is twenty seconds. Hold the stairwell!\" - Muzzle cracks, shattered glass falling.",
+                audioTranscript = "Raven Kane: \"Too late! We have company on the catwalks. Taking fire!\" / Dr. Aris Thorne: \"Hold the stairwell! Extraction shuttle ETA is twenty seconds.\"",
                 audioAtmosphere = "Subsonic shockwaves, ricocheting tungsten darts, blaring perimeter alarm klaxon.",
                 cameraPhysics = "Dynamic whip-pan into tracking dolly alongside sliding subject, accelerating with muzzle flashes.",
                 lightingTexture = "Stroboscopic cyan and white muzzle flares slicing through rain sheets, deep shadows preserved.",
@@ -195,12 +195,12 @@ Negative constraints: No jittery blur, no face morphology shifts, no plastic ski
                 nextSegmentSummary = "Scene 4: Rooftop grapple extraction finale",
                 videoPrompt = """```prompt
 HEADER:
-Format: Action Cinematic Sequence | Ratio: 16:9 | Duration: 10s | Atmosphere: Intense Cybernetic Firefight | Audio: Suppressed hypersonic rounds, shattered glass, klaxon | Identity Lock Clause: [ref_image] = locked master still from Phase 1 (Raven Kane)
+Format: Action Cinematic Sequence | Ratio: 16:9 | Duration: 10s | Atmosphere: Intense Cybernetic Firefight | Audio: Hypersonic rounds, shattered glass | Dialogue: Raven Kane: "Too late! We have company on the catwalks. Taking fire!" & Dr. Thorne: "Hold the stairwell! Extraction shuttle ETA is twenty seconds." | Identity Lock Clause: [ref_image] = locked master still from Phase 1 (Raven Kane & Dr. Thorne)
 
 TIMELINE:
 0:20–0:23: Sudden whip-pan right as security drone descends; Raven ([ref_image]) executes knee-slide across wet metal grate, coat billowing behind.
-0:23–0:26: Over-the-shoulder slow-motion (48fps feel); Raven draws micro-rail pistol, firing three precise bursts; blue ionized smoke trails bloom from barrel.
-0:26–0:30: Background reinforced glass partition shatters into thousands of shimmering crystalline cubes; Thorne provides covering fire with heavy kinetic revolver.
+0:23–0:26: Over-the-shoulder slow-motion; Raven draws micro-rail pistol firing suppressive bursts, yelling: "Too late! We have company on the catwalks. Taking fire!"
+0:26–0:30: Background glass partition shatters; Thorne fires heavy kinetic revolver, shouting over gunfire: "Hold the stairwell! Extraction shuttle ETA is twenty seconds."
 
 STYLE BOOSTERS:
 Camera physics: Shutter angle 90 degrees for crisp action motion blur, intense cinematic kinetic energy, zero stabilization loss.
@@ -218,7 +218,7 @@ Negative constraints: No exaggerated anime effects, no muddy dark clipping, pres
                 endSeconds = 34,
                 referenceTimestamp = "0:32",
                 visualSummary = "Rooftop extraction climax. Raven fires magnetic grapple cable skyward into thunderous clouds as extraction ship spotlights cut through the storm.",
-                audioTranscript = "\"I never retreat, Aris. See you on the rooftop.\" - Grapple launch thump, ascending jet turbine roar.",
+                audioTranscript = "Raven Kane: \"I never retreat, Aris. See you on the rooftop.\"",
                 audioAtmosphere = "Deafening VTOL jet engines, wind shear blowing rain horizontally, triumphant synth swell.",
                 cameraPhysics = "Dramatic vertigo push-in / tilt-up looking into the sky as subject launches upward.",
                 lightingTexture = "Twin 10,000-lumen titanium white searchlights piercing through torrential rain down onto subject.",
@@ -226,10 +226,10 @@ Negative constraints: No exaggerated anime effects, no muddy dark clipping, pres
                 nextSegmentSummary = "End of Sequence (Fade to Title Card)",
                 videoPrompt = """```prompt
 HEADER:
-Format: Climactic Film Finale | Ratio: 16:9 | Duration: 4s | Atmosphere: Epic Storm Extraction | Audio: VTOL turbine roar, grapple cord tension whine | Identity Lock Clause: [ref_image] = locked master still from Phase 1 (Raven Kane)
+Format: Climactic Film Finale | Ratio: 16:9 | Duration: 4s | Atmosphere: Epic Storm Extraction | Audio: VTOL turbine roar, grapple cord tension whine | Dialogue: Raven Kane: "I never retreat, Aris. See you on the rooftop." | Identity Lock Clause: [ref_image] = locked master still from Phase 1 (Raven Kane)
 
 TIMELINE:
-0:30–0:32: Low angle medium shot; Raven ([ref_image]) holsters secondary sidearm, aims grapple launcher at upper cornice, firing high-tensile wire.
+0:30–0:32: Low angle medium shot; Raven ([ref_image]) holsters secondary sidearm, speaking into radio with calm smirk: "I never retreat, Aris. See you on the rooftop." She aims grapple launcher at upper cornice.
 0:32–0:34: Wire goes taut with metallic resonance; camera booms upward in synchrony as she ascends into blinding white searchlight beams of hovering extraction shuttle.
 
 STYLE BOOSTERS:
