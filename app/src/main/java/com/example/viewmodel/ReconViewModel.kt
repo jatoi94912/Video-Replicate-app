@@ -62,6 +62,9 @@ class ReconViewModel(application: Application) : AndroidViewModel(application) {
     private val _showVideoInspector = MutableStateFlow(false)
     val showVideoInspector: StateFlow<Boolean> = _showVideoInspector.asStateFlow()
 
+    private val _showAlignmentStudio = MutableStateFlow(false)
+    val showAlignmentStudio: StateFlow<Boolean> = _showAlignmentStudio.asStateFlow()
+
     private val _activeVideoUri = MutableStateFlow<Uri?>(null)
     val activeVideoUri: StateFlow<Uri?> = _activeVideoUri.asStateFlow()
 
@@ -437,6 +440,23 @@ class ReconViewModel(application: Application) : AndroidViewModel(application) {
 
     fun dismissVideoInspector() {
         _showVideoInspector.value = false
+    }
+
+    fun openAlignmentStudio() {
+        _showAlignmentStudio.value = true
+    }
+
+    fun dismissAlignmentStudio() {
+        _showAlignmentStudio.value = false
+    }
+
+    fun autoFixStoryboardPrompt(sceneIndex: Int, fixedPrompt: String) {
+        val proj = _currentProject.value ?: return
+        val updatedCards = proj.storyboardCards.map {
+            if (it.segmentIndex == sceneIndex) it.copy(videoPrompt = fixedPrompt) else it
+        }
+        _currentProject.value = proj.copy(storyboardCards = updatedCards)
+        _toastMessage.value = "⚡ Scene $sceneIndex Prompt Corrected & Re-aligned!"
     }
 
     fun getParityVerificationItems(): List<com.example.ui.components.ParityVerificationItem> {

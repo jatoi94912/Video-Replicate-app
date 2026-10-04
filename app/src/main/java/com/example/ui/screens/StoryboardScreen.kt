@@ -82,6 +82,7 @@ fun StoryboardScreen(
     onOpenExport: () -> Unit,
     onOpenParityDialog: () -> Unit,
     onInspectVideo: () -> Unit,
+    onOpenAlignmentStudio: () -> Unit,
     onBack: () -> Unit,
     onRegenCharacter: (com.example.model.CharacterCard) -> Unit,
     modifier: Modifier = Modifier
@@ -227,6 +228,33 @@ fun StoryboardScreen(
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("▶️ Real Video Inspector", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                     }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // AI Video Synthesis & Mistake Studio CTA
+                androidx.compose.material3.Button(
+                    onClick = onOpenAlignmentStudio,
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = ReconAmber.copy(alpha = 0.15f),
+                        contentColor = ReconAmber
+                    ),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, ReconAmber),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(38.dp)
+                        .testTag("open_alignment_studio_button"),
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 10.dp, vertical = 4.dp)
+                ) {
+                    Icon(Icons.Default.AutoAwesome, contentDescription = null, modifier = Modifier.size(15.dp), tint = ReconAmber)
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(
+                        "🎬 Prompt-to-Video Synthesis & Mistake Fixer Studio →",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = ReconAmber
+                    )
                 }
             }
         }

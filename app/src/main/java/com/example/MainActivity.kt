@@ -71,6 +71,7 @@ class MainActivity : ComponentActivity() {
                 val showExport by viewModel.showExportDialog.collectAsStateWithLifecycle()
                 val showParity by viewModel.showParityDialog.collectAsStateWithLifecycle()
                 val showVideoInspector by viewModel.showVideoInspector.collectAsStateWithLifecycle()
+                val showAlignmentStudio by viewModel.showAlignmentStudio.collectAsStateWithLifecycle()
                 val activeVideoUri by viewModel.activeVideoUri.collectAsStateWithLifecycle()
                 val extractedFrames by viewModel.extractedFrames.collectAsStateWithLifecycle()
                 val copiedPromptId by viewModel.copiedPromptId.collectAsStateWithLifecycle()
@@ -162,6 +163,7 @@ class MainActivity : ComponentActivity() {
                                         onOpenExport = { viewModel.openExportDialog() },
                                         onOpenParityDialog = { viewModel.openParityDialog() },
                                         onInspectVideo = { viewModel.openVideoInspector() },
+                                        onOpenAlignmentStudio = { viewModel.openAlignmentStudio() },
                                         onBack = { viewModel.proceedToDurationSelector() },
                                         onRegenCharacter = { viewModel.openRegenDialog(it) }
                                     )
@@ -250,6 +252,21 @@ class MainActivity : ComponentActivity() {
                                     videoUri = activeVideoUri,
                                     extractedFrame = extractedFrames["sb_1"],
                                     onDismiss = { viewModel.dismissVideoInspector() }
+                                )
+                            }
+                        }
+
+                        // AI Video Synthesis & Mistake Fixer Studio Modal
+                        if (showAlignmentStudio) {
+                            currentProject?.let { proj ->
+                                com.example.ui.components.PromptVideoAlignmentStudio(
+                                    project = proj,
+                                    videoUri = activeVideoUri,
+                                    extractedFrames = extractedFrames,
+                                    onAutoFixPrompt = { idx, fixedPrompt ->
+                                        viewModel.autoFixStoryboardPrompt(idx, fixedPrompt)
+                                    },
+                                    onDismiss = { viewModel.dismissAlignmentStudio() }
                                 )
                             }
                         }
