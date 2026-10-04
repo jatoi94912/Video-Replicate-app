@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RECON-AI</string>
+    <string name="subtitle">Video-to-Prompt Reverse Engineering Studio</string>
+    <string name="upload_title">Upload &amp; Reverse Engineer</string>
+    <string name="phase_1_title">🎭 Character Extraction &amp; Lock</string>
+    <string name="phase_2_title">🎬 Storyboard Prompt Engine</string>
+    <string name="copied_to_clipboard">Copied to clipboard!</string>
+</resources>

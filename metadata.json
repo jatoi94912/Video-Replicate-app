@@ -1,0 +1,6 @@
+{
+  "name": "RECON-AI",
+  "description": "Video-to-Prompt Reverse Engineering & Storyboard Studio with Character Locking, Timeline Extraction & Precision Prompting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
